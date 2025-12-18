@@ -2,6 +2,12 @@
 
 This repository implements Speculative Decoding for OpenAI's Whisper model. By using a smaller "draft" model (e.g., `whisper-tiny`) to preview tokens and a larger "main" model (e.g., `whisper-large-v2`) to verify them, this project achieves significant latency reductions while maintaining the exact same Word Error Rate (WER) as the large model.
 
+**Technical Note: Why Whisper Large-V2?**
+This project intentionally uses `openai/whisper-large-v2` as the main model instead of the newer `large-v3`.
+
+**Reason:** Architectural Compatibility.
+ `Whisper-large-v3` introduces significant changes to the feature extractor (128 Mel frequency bins vs. 80 in V2) and the tokenizer. Most available high-quality draft models (such as `distil-large-v2` or standard `tiny`/`base` checkpoints) are trained on the V2 architecture. Mixing V3 as a main model with V2-based draft models causes encoder-decoder feature mismatches and tokenizer conflicts, leading to runtime errors or degraded performance. Using `large-v2` ensures seamless compatibility with the widest range of draft models.
+
 ## Key Results
 
 | Model Configuration | Draft Model | Speedup | WER |
