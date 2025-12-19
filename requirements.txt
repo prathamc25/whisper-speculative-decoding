@@ -1,0 +1,16 @@
+torch
+transformers
+accelerate
+datasets
+evaluate
+jiwer
+librosa
+soundfile
+fastapi
+uvicorn
+python-multipart
+matplotlib
+pandas
+seaborn
+numpy
+nest_asyncio
